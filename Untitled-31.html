@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html >
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+tbody {
+    height: 200px;
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+ 
+<div ng-app="myApp" ng-controller="customersCtrl" ng-init="myCol='lightblue'">
+  <form name ="myForm" ng-submit="myFunc()">
+ 
+      
+        First Name: <input type="text" style="background-color:{{myCol}}" ng-model="firstname" required><br/>
+        User: <input type="text" ng-model="user"><br/>
+        location:
+      <select>
+        <option ng-model="location" value="noida">Noida</option>
+        <option ng-model="location" value="chennai">Chennai</option>
+        <option ng-model="location" value="bangalore">Bangalore</option>
+        <option ng-model="location" value="hyderabad">Hyderabad</option>
+      </select>
+        Gender:
+        <input type="radio" ng-model="gender" value="M">Male
+        <input type="radio" ng-model="gender" value="F" >Female
+        <br/>
+      <input type="submit">
+</form><br/><br/>
+    <table>
+        <tr>
+            <th>FIRST NAME</th>
+            <th>USER ID</th>
+            <th>LOCATION</th>
+            <th>GENDER</th>
+        </tr>      
+  <tr ng-repeat="x in names">
+    <td>{{ x.firstname }}</td>
+    <td>{{ x.user }}</td>
+      <td>{{x.location}}</td>
+      <td>{{x.gender}}</td>
+</tr>
+</table>
+</div>
+ 
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+   $http.get("https://raw.githubusercontent.com/Amir22010/json/master/jsontest")
+   .then(function (response) {
+       
+       $scope.myFunc = function(){
+           
+            $scope.names = response.data.members;
+           
+           $scope.myFilter = function(names){
+               
+               if($scope.gender =="M")
+               
+               {
+               return names.gender === "M";
+               }
+               
+               else if($scope.gender =="F")
+                   {
+                       return names.gender ==="F";
+                   }
+               
+               else {
+                   
+                  $scope.display = "Please Input Gender Value";
+               }
+           };
+           
+          }});
+   
+});    
+    
+</script>
+ 
+</body>
+</html>

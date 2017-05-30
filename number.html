@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app='testClickModule'>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div ng-controller="myController">
+        <input type="button" value="Next" ng-click="getNumber()"> {{num}}
+        <br>
+    </div>
+    <!-- Link to AngularJS: -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js">
+    </script>
+    <!-- Optional Model and controller config goes here: -->
+    <script>
+        var myApp = angular.module('testClickModule', []);
+        myApp.controller('myController', function($scope) {
+            $scope.num = 1;
+            $scope.getNumber = function() {
+                $scope.num = Math.floor(Math.random() * 99) + 1;
+            };
+        });
+    </script>
+</body>
+</html>

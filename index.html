@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment</title>
+    <style>
+        table, th, td 
+        {
+            margin:10px 0;
+            border:solid 1px #333;
+            padding:2px 4px;
+            font:15px Verdana;
+        }
+        th {
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+<form name="myForm" action="">
+First Name: <input type="text" name="first" required><br/>
+Last Name: <input type="text" name="last"/><br/>
+Gender: <input type="radio" name="gender" value="M"/>Male<input type="radio" name="gender" value="F"/>Female<br/>
+    <button type="button" onclick="loadXMLDoc()">Search</button>
+</form>
+<div id ="showData">
+Display Here
+</div>
+<script>
+function loadXMLDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myFunction(this);
+    }
+  };
+  xmlhttp.open("GET", "https://raw.githubusercontent.com/Amir22010/json/master/jsontest", true);
+  xmlhttp.send();
+}
+
+function myFunction(xyz) {
+
+var x =document.myForm.gender.value;
+var y =xyz.responseText;
+var obj = JSON.parse(y);
+    
+    
+  var col = [];
+        for (var i = 0; i < obj.members.length; i++) {
+            for (var key in obj.members[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }  
+    
+    
+    
+    
+    
+     var table = document.createElement("table");
+
+    
+      var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+    
+    
+
+for(var i =0;i<obj.members.length;i++)
+
+if(obj.members[i].gender==x)
+
+    {
+        if(x=="M"){
+       
+     //console.log(obj.members[i].first_name);
+     //console.log(obj.members[i].last_name);
+     //console.log(obj.members[i].gender);
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = obj.members[i][col[j]];
+            
+            
+            
+            
+           
+        }
+        }
+        
+        else if(x=="F"){
+          
+            //console.log(obj.members[i].first_name);
+            //console.log(obj.members[i].last_name);
+            //console.log(obj.members[i].gender);
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = obj.members[i][col[j]];
+            
+           
+            
+        }
+
+    }
+        }
+    
+    
+    
+     var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    
+   
+    
+    
+    
+    
+}
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+
+<div ng-app="myModule" ng-controller="MyController">
+    
+    {{A}}
+    
+    </div>
+
+<script>
+    
+    function MyService() {
+    this.doIt = function() {
+        return "done";
+    }
+}
+
+
+var myModule = angular.module("myModule", []);
+
+myModule.service("myservice", MyService);
+
+myModule.controller("MyController", function($scope, myservice) {
+
+$scope.A = myservice.doIt();
+
+});
+    
+  </script> 
+    
+</body>
+    
+</html>  
+ 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+
+<div ng-app="myModule" ng-controller="MyController">
+    
+    {{A}}
+    
+    </div>
+
+<script>
+
+var myModule = angular.module("myModule", []);
+
+myModule.value("numberValue", 999);
+
+myModule.controller("MyController", function($scope, numberValue) {
+
+ $scope.A = numberValue;
+
+});
+
+    
+    
+  </script>      
+    
+
+
+</body>
+</html>

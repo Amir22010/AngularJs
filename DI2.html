@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+
+<div ng-app="myModule" ng-controller="MyController">
+    
+    {{A}}
+    
+    </div>
+
+<script>
+
+var myModule = angular.module("myModule", []);
+
+myModule.factory("myFactory", function() {
+    return "a value";
+});
+
+myModule.controller("MyController", function($scope, myFactory) {
+
+ $scope.A = myFactory;
+
+});
+
+    
+    
+  </script>      
+    
+
+
+</body>
+</html>
